@@ -11,9 +11,20 @@ Pythonのwebフレームワーク
 
 ## サンプルコードの実行
 
+開発環境
+
 ```bash
 pip install -r requirements.txt
+python migrate.py
 uvicorn main:app --reload
+```
+
+本番環境
+
+```bash
+pip install -r requirements.txt
+python migrate.py
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 ## 自動生成されるドキュメント
@@ -42,24 +53,13 @@ def create(name: str = Body(), price: int = Body(default=1000),):
 
 ## ルーティング
 
-```APIRouter```を使用
+各api内で```router```を作成
 
-```python
-from fastapi import APIRouter
+```main.py```で```include_router```
 
+```path```はrouterで定義
 
-router = APIRouter(tags=['Item'])
-```
-
-```python
-from fastapi import FastAPI
-
-from routers.Item import router as item_router
-
-
-app = FastAPI()
-app.include_router(router=item_router, prefix='/items')
-```
+```prefix```はinclude_routerに定義
 
 ## DBとの接続
 
@@ -67,6 +67,6 @@ app.include_router(router=item_router, prefix='/items')
 
 DB接続用のsessionなどを```database.py```に集約
 
-テーブル定義は各router内の```models.py```に定義
+テーブル定義は各api内の```models.py```に定義
 
-```models.py```の変更後は```python migrate.py```
+スキーマ(```models.py```)の変更後は```python migrate.py```

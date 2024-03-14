@@ -6,9 +6,15 @@ target_bases = [
     ItemBase,
 ]
 
-for Base in target_bases:
-    Base.metadata.create_all(bind=engine)
 
-    for table in Base.metadata.tables:
-        title = table.title()
-        print(f'{title} table created successfully')
+def migrate():
+    for Base in target_bases:
+        Base.metadata.create_all(bind=engine)
+
+        for table in Base.metadata.tables:
+            title = table.title()
+            print(f'{title} table created successfully')
+
+
+if __name__ == '__main__':
+    migrate()
