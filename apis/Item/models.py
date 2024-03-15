@@ -10,15 +10,21 @@ Base: DeclarativeMeta = declarative_base()
 class Item(Base):
     __tablename__ = 'items'
     uuid = Column(
-        Uuid,
+        type_=Uuid,
+        default=uuid4,
         primary_key=True,
         index=True,
-        default=uuid4,
         unique=True,
-        nullable=False,
     )
-    created_at = Column(DateTime, default=datetime.now)
-    updated_at = Column(DateTime, default=datetime.now)
+    created_at = Column(
+        type_=DateTime,
+        default=datetime.now,
+    )
+    updated_at = Column(
+        type_=DateTime,
+        default=datetime.now,
+        onupdate=datetime.now,
+    )
     #
-    name = Column(String, index=True)
-    price = Column(Integer)
+    name = Column(type_=String)
+    price = Column(type_=Integer)

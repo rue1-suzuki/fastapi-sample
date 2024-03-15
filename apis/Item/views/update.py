@@ -1,4 +1,3 @@
-from datetime import datetime
 from uuid import UUID
 
 from fastapi import Body, HTTPException, Path
@@ -23,8 +22,6 @@ def update(item_id: UUID = Path(), name: str | None = Body(default=None), price:
 
     if not price is None:
         item.price = price
-
-    item.updated_at = datetime.now()
 
     db.commit()
     db.refresh(item)
