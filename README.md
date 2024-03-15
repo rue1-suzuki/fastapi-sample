@@ -7,7 +7,7 @@ Pythonのwebフレームワーク
 - 構文がシンプル
 - ドキュメントの自動生成
 - リクエストの構造が厳密
-- ASGIサーバで非同期処理をサポート
+- 非同期処理をサポート
 
 ## サンプルコードの実行
 
@@ -16,7 +16,8 @@ Pythonのwebフレームワーク
 ```bash
 pip install -r requirements.txt
 python migrate.py
-uvicorn main:app --reload
+# uvicorn main:app --reload
+python main.py
 ```
 
 本番環境
@@ -24,7 +25,8 @@ uvicorn main:app --reload
 ```bash
 pip install -r requirements.txt
 python migrate.py
-uvicorn main:app --host 0.0.0.0 --port 8000
+# uvicorn main:app --host 0.0.0.0 --port 8000
+gunicorn --config gunicorn_config.py
 ```
 
 ## 自動生成されるドキュメント
@@ -35,8 +37,9 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 ## データの受け取り
 
 それぞれ専用の受け取り方法があるのでそれを使う。
+リクエストからビューに渡す引数が明示できて分かりやすい。
 
-リクエスト変数から取得する方法はドキュメントが曖昧になり、バリデーションも行われない。
+```request```変数から取得する方法はドキュメントが曖昧になり、バリデーションも行われない。
 
 ```python
 from fastapi import Body, Form, Header, Path, Query
@@ -70,3 +73,11 @@ DB接続用のsessionなどを```database.py```に集約
 テーブル定義は各api内の```models.py```に定義
 
 スキーマ(```models.py```)の変更後は```python migrate.py```
+
+## startapi.py
+
+新しいAPIを追加する
+
+```bash
+python startapi.py Item
+```

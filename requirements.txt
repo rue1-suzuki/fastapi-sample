@@ -4,9 +4,11 @@ click==8.1.7
 exceptiongroup==1.2.0
 fastapi==0.110.0
 greenlet==3.0.3
+gunicorn==21.2.0
 h11==0.14.0
 httptools==0.6.1
 idna==3.6
+packaging==24.0
 pydantic==2.6.3
 pydantic_core==2.16.3
 python-dotenv==1.0.1
